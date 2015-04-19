@@ -3,7 +3,9 @@ package softwarequality.hw03.gradientgenerator.geometry;
 import java.awt.*;
 
 /**
- * Created by vcaniga on 4/19/15.
+ * Created on 19.04.2015.
+ *
+ * @author Vladimir Caniga
  */
 public class Vector2D {
 
@@ -26,10 +28,18 @@ public class Vector2D {
     }
 
     public double scalarProduct(Vector2D vect) {
+        if (vect == null) {
+            throw new NullPointerException("vect must not be null.");
+        }
+
         return dx * vect.dx + dy * vect.dy;
     }
 
     public static Vector2D vectorFromTwoPoints(Point startPoint, Point endPoint) {
+        if (startPoint == null || endPoint == null) {
+            throw new NullPointerException("startPoint and endPoint must not be null.");
+        }
+
         int dx = endPoint.x - startPoint.x;
         int dy = endPoint.y - startPoint.y;
 

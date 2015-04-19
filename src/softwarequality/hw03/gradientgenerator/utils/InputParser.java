@@ -4,7 +4,9 @@ import java.awt.*;
 import java.util.Scanner;
 
 /**
- * Created by vcaniga on 4/19/15.
+ * Created on 19.04.2015.
+ *
+ * @author Vladimir Caniga
  */
 public class InputParser {
 
@@ -17,16 +19,16 @@ public class InputParser {
         try {
             settings.width = Integer.parseInt(input[0]);
             settings.height = Integer.parseInt(input[1]);
-        } catch (NumberFormatException e) {
+        } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
             throw new WrongInputException("Exception while parsing width and height arguments.", e);
         }
         settings.colors = in.nextLine().toCharArray();
         String[] params = in.nextLine().split("\\s+");
-        settings.type = params[0].toLowerCase();
         Point startPoint;
         try {
+            settings.type = params[0].toLowerCase();
             startPoint = new Point(Integer.parseInt(params[1]), Integer.parseInt(params[2]));
-        } catch (NumberFormatException e) {
+        } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
             throw new WrongInputException("Exception while parsing start point x and y arguments.", e);
         }
         settings.startPoint = startPoint;
@@ -34,7 +36,7 @@ public class InputParser {
             case "radial":
                 try {
                     settings.radius = Double.parseDouble(params[3]);
-                } catch (NumberFormatException e) {
+                } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
                     throw new WrongInputException("Exception while parsing radius argument.", e);
                 }
                 break;
@@ -42,7 +44,7 @@ public class InputParser {
                 Point endPoint;
                 try {
                     endPoint = new Point(Integer.parseInt(params[3]), Integer.parseInt(params[4]));
-                } catch (NumberFormatException e) {
+                } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
                     throw new WrongInputException("Exception while parsing end point arguments.", e);
                 }
                 settings.endPoint = endPoint;

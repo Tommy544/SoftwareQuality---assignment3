@@ -8,13 +8,23 @@ import softwarequality.hw03.gradientgenerator.utils.WrongInputException;
 import java.awt.*;
 
 /**
- * Created by vcaniga on 4/19/15.
+ * Created on 19.04.2015.
+ *
+ * @author Vladimir Caniga
  */
 public class GradientGenerator {
 
-    Settings settings;
-
     public static String generateLinear(int width, int height, char[] colors, Point startPoint, Point endPoint) {
+        if (width < 0 || height < 0) {
+            throw new IllegalArgumentException("width and height must not be lower than zero.");
+        }
+        if (colors.length == 0) {
+            throw new IllegalArgumentException("colors must contain at least one color.");
+        }
+        if (startPoint == null || endPoint == null) {
+            throw new NullPointerException("startPoint and endPoint must not be null.");
+        }
+
         StringBuilder sb = new StringBuilder();
         Vector2D startToEndVector = Vector2D.vectorFromTwoPoints(startPoint, endPoint);
         Vector2D startToEndUnitVector = startToEndVector.getUnitVector();
@@ -41,6 +51,16 @@ public class GradientGenerator {
     }
 
     public static String generateRadial(int width, int height, char[] colors, Point centerPoint, double radius) {
+        if (width < 0 || height < 0 || radius < 0) {
+            throw new IllegalArgumentException("width, height and radius must not be lower than zero.");
+        }
+        if (colors.length == 0) {
+            throw new IllegalArgumentException("colors must contain at least one color.");
+        }
+        if (centerPoint == null) {
+            throw new NullPointerException("startPoint and endPoint must not be null.");
+        }
+
         StringBuilder sb = new StringBuilder();
 
         // Iterate through rows and columns
@@ -57,11 +77,6 @@ public class GradientGenerator {
 
         return sb.toString();
     }
-
-    public GradientGenerator(Settings settings) {
-        this.settings = settings;
-    }
-
 
     public static String getProgramUsage() {
 
@@ -81,19 +96,23 @@ public class GradientGenerator {
             if (e.getCause() != null) {
                 System.out.println(e.getCause().getMessage());
             }
-            System.out.println(getProgramUsage());
+            System.out.print(getProgramUsage());
             return;
         }
 
-        if (settings.type.equals("linear")) {
-            System.out.println(generateLinear(settings.width, settings.height, settings.colors,
-                    settings.startPoint, settings.endPoint));
-        } else if (settings.type.equals("radial")) {
-            System.out.println(generateRadial(settings.width, settings.height, settings.colors,
-                    settings.startPoint, settings.radius));
-        } else {
-            System.out.println("Wrong input: " + settings.type);
-            System.out.println(getProgramUsage());
+        switch (settings.type) {
+            case "linear":
+                System.out.print(generateLinear(settings.width, settings.height, settings.colors,
+                        settings.startPoint, settings.endPoint));
+                break;
+            case "radial":
+                System.out.print(generateRadial(settings.width, settings.height, settings.colors,
+                        settings.startPoint, settings.radius));
+                break;
+            default:
+                System.out.println("Wrong input: " + settings.type);
+                System.out.print(getProgramUsage());
+                break;
         }
 
     }

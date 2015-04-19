@@ -1,7 +1,9 @@
 package softwarequality.hw03.gradientgenerator.utils;
 
 /**
- * Created by vcaniga on 4/19/15.
+ * Created on 19.04.2015.
+ *
+ * @author Vladimir Caniga
  */
 public class WrongInputException extends Exception {
 
