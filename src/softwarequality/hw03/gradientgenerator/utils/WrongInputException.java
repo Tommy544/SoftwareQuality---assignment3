@@ -1,9 +1,12 @@
 package softwarequality.hw03.gradientgenerator.utils;
 
 /**
+ * Custom exception used in InputParser
+ *
  * Created on 19.04.2015.
  *
  * @author Vladimir Caniga
+ * @author Jakub Smolar
  */
 public class WrongInputException extends Exception {
 

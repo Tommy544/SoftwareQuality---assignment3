@@ -8,12 +8,26 @@ import softwarequality.hw03.gradientgenerator.utils.WrongInputException;
 import java.awt.*;
 
 /**
+ * Class defining methods for generating linear and radial gradients
+ * Also contains main method of the program
+ *
  * Created on 19.04.2015.
  *
  * @author Vladimir Caniga
+ * @author Jakub Smolar
  */
 public class GradientGenerator {
 
+    /**
+     * Generates linear gradient.
+     *
+     * @param width      width of generated gradient
+     * @param height     height of generated gradient
+     * @param colors     array of symbols that are used as colors in the drawing
+     * @param startPoint starting point of color graduation
+     * @param endPoint   ending point of color graduation
+     * @return String containing whole generated gradient picture
+     */
     public static String generateLinear(int width, int height, char[] colors, Point startPoint, Point endPoint) {
         if (width < 0 || height < 0) {
             throw new IllegalArgumentException("width and height must not be lower than zero.");
@@ -50,6 +64,16 @@ public class GradientGenerator {
         return sb.toString();
     }
 
+    /**
+     * Generates radial gradient.
+     *
+     * @param width width of generated gradient
+     * @param height height of generated gradient
+     * @param colors array of symbols that are used as colors in the drawing
+     * @param centerPoint the center point of the color graduation
+     * @param radius radius of the color graduation
+     * @return String containing whole generated gradient picture
+     */
     public static String generateRadial(int width, int height, char[] colors, Point centerPoint, double radius) {
         if (width < 0 || height < 0 || radius < 0) {
             throw new IllegalArgumentException("width, height and radius must not be lower than zero.");
@@ -78,6 +102,11 @@ public class GradientGenerator {
         return sb.toString();
     }
 
+    /**
+     * Generates and returns program usage message.
+     *
+     * @return String containing program usage message
+     */
     public static String getProgramUsage() {
 
         return "Program usage:" + System.lineSeparator() + "num_columns num_rows" + System.lineSeparator()
@@ -86,6 +115,13 @@ public class GradientGenerator {
                 + "\t'linear' start_x start_y end_x end_y" + System.lineSeparator();
     }
 
+    /**
+     * Main method of the program.
+     * Uses InputParser to parse user input then generates gradient picture according to user input and
+     * finally prints the gradient picture to System.out.
+     *
+     * @param args program arguments
+     */
     public static void main(String[] args) {
         InputParser inputParser = new InputParser();
         Settings settings;

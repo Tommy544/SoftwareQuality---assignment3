@@ -4,9 +4,13 @@ import java.awt.*;
 import java.util.Scanner;
 
 /**
+ * Class defines method used for parsing user input.
+ * Intended to use with GradientGenerator class.
+ *
  * Created on 19.04.2015.
  *
  * @author Vladimir Caniga
+ * @author Jakub Smolar
  */
 public class InputParser {
 
